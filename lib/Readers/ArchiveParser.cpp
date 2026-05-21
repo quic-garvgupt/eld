@@ -155,6 +155,10 @@ eld::Expected<uint32_t> ArchiveParser::parseFile(InputFile &inputFile) const {
                     ->getSymbol(SymName.str()));
           }
         }
+        // Restart from the beginning of the symbol table so that earlier
+        // entries (which may provide a superset of the newly-undefined
+        // symbols) are considered before later, subset-only entries.
+        break;
       } // end of if
     } // end of for
   } while (willSymResolved);
